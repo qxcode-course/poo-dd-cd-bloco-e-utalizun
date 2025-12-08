@@ -1,0 +1,9 @@
+{
+    "patches": [
+        {
+            "label": "2025-12-08_04-42-37",
+            "content": "from abc import ABC, abstractmethod\n\nclass Brinquedo(ABC):\n    @abstractmethod\n    def apertar(self):\n        pass\n    @abstractmethod\n    def jogar_no_chao(self):\n        pass\n\ndef brincar(brinquedo: Brinquedo):\n    brinquedo.apertar()\n    brinquedo.jogar_no_chao()\n    print(brinquedo)\n    ",
+            "lines": "15"
+        }
+    ]
+}
