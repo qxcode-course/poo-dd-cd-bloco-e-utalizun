@@ -2,8 +2,23 @@
     "patches": [
         {
             "label": "2025-12-08_04-45-53",
-            "content": "",
+            "content": "@@ -1,204 +0,0 @@\n-from abc import ABC, abstractmethod%0A%0Aclass Veiculo(ABC):%0A    def __init__(self, id: str, tipo: str, hora_entrada: int):%0A        self.id = id%0A        self.tipo = tipo%0A        self.hora_entrada = 0%0A        \n",
             "lines": "0"
+        },
+        {
+            "label": "2025-12-09_19-18-54",
+            "content": "@@ -193,236 +193,12 @@\n = 0%0A\n-%0A\n     \n-def setEntrada(self, hora):%0A        self.hora_entrada = hora%0A%0A    def getEntrada(self):%0A        return self.hora_entrada%0A    %0A    def getId(self):%0A        return self.id%0A    %0A    def getTipo(self):%0A        return self.tipo%0A\n     \n",
+            "lines": "8"
+        },
+        {
+            "label": "2025-12-09_19-26-12",
+            "content": "@@ -425,1111 +425,4 @@\n     \n-%0A    @abstractmethod%0A    def calcular_valor(self, hora_saida):%0A        pass%0A%0A    def __str__(self):%0A        return f%22__%7Bself.tipo%7D : ___%7Bself.id%7D : %7Bself.horaEntrada%7D%22%0A    %0Aclass Bike(Veiculo):%0A    def __init__(self, id):%0A        super().__init__(id,%22Bike%22)%0A%0A    def calcular_valor(self, hora_saida):%0A        return 3.0%0A    %0A%0Aclass Estacionamento:%0A    def __init__(self):%0A        self.veiculos = %5B%5D%0A        self.horaAtual = 0%0A%0A    def procurar_veiculo(self, id):%0A        for i, v in enumerate(self.veiculos):%0A            if v.getId() == id:%0A                return i%0A        return -1%0A    %0A    def passarTempo(self, tempo):%0A        self.horaAtual += tempo %0A%0A    def estacionar(self, veiculo):%0A        veiculo.setEntrada(self.horaAtual)%0A        self.veiculos.append(veiculo)%0A%0A    def pagar(self, id):%0A        idx = self.procurar_veiculo(id)%0A        if idx == -1:%0A            return%0A        %0A        v = self.veiculos %5Bidx%5D%0A        valor = v.calcular_valor(self.horaAtual)%0A%0A        print (%0A            f%22%7Bv.getTipo()%7D chegou %7Bv.getEntrada()%7D saiu%7Bself.horaAtual%7D.%22%0A            f%22Pagar R$ %7Bvalor:.2%7D%22%0A        )%0A\n",
+            "lines": "20"
+        },
+        {
+            "label": "2025-12-09_20-21-02",
+            "content": "from abc import ABC, abstractmethod\n\nclass Veiculo(ABC):\n    def __init__(self, id: str, tipo: str, hora_entrada: int):\n        self.id = id\n        self.tipo = tipo\n        self.hora_entrada = 0\n\n    def setEntrada(self, hora):\n        self.hora_entrada = hora\n\n    def getEntrada(self):\n        return self.hora_entrada\n    \n    def getId(self):\n        return self.id\n    \n    def getTipo(self):\n        return self.tipo\n    \n    @abstractmethod\n    def calcular_valor(self, hora_saida):\n        pass\n\n    def __str__(self):\n        return f\"__{self.tipo} : ___{self.id} : {self.horaEntrada}\"\n    \nclass Bike(Veiculo):\n    def __init__(self, id):\n        super().__init__(id,\"Bike\")\n\n    def calcular_valor(self, hora_saida):\n        return 3.0\n    \n\nclass Estacionamento:\n    def __init__(self):\n        self.veiculos = []\n        self.horaAtual = 0\n\n    def procurar_veiculo(self, id):\n        for i, v in enumerate(self.veiculos):\n            if v.getId() == id:\n                return i\n        return -1\n    \n    def passarTempo(self, tempo):\n        self.horaAtual += tempo \n\n    def estacionar(self, veiculo):\n        veiculo.setEntrada(self.horaAtual)\n        self.veiculos.append(veiculo)\n\n    def pagar(self, id):\n        idx = self.procurar_veiculo(id)\n        if idx == -1:\n            return\n        \n        v = self.veiculos [idx]\n        valor = v.calcular_valor(self.horaAtual)\n\n        print (\n            f\"{v.getTipo()} chegou {v.getEntrada()} saiu{self.horaAtual}.\"\n            f\"Pagar R$ {valor:.2}\"\n        )\n",
+            "lines": "65"
         }
     ]
 }
