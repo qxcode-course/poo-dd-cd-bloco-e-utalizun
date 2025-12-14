@@ -32,6 +32,23 @@ class Bike(Veiculo):
     def calcular_valor(self, hora_saida):
         return 3.0
     
+class Moto(Veiculo):
+    def __init__(self, id):
+        super().__init__(id,"Moto")
+
+    def calcular_valor(self, hora_saida):
+        tempo = hora_saida - self.hora_entrada
+        return tempo / 20
+    
+
+class Carro(Veiculo):
+    def __init__(self, id):
+        super().__init__(id,"Carro")
+
+    def calcular_valor(self, hora_saida):
+        tempo = hora_saida - self.hora_entrada
+        valor = tempo / 10
+        return 5 if valor < 5 else valor
 
 class Estacionamento:
     def __init__(self):
@@ -61,5 +78,24 @@ class Estacionamento:
 
         print (
             f"{v.getTipo()} chegou {v.getEntrada()} saiu{self.horaAtual}."
-            f"Pagar R$ {valor:.2}"
+            f"Pagar R$ {valor:.2f}"
         )
+    def sair(self,id):
+        idx = self.procurar_veiculo(id)
+        if idx == -1:
+            return
+        self.pagar(id)
+        self.veiculos.pop(idx)
+
+    def __str__(self):
+        texto = ""
+        for v in self.veiculos:
+            texto += str(v) + "\n"
+        texto += f"Hora atual: {self.horaAtual}"
+        return texto
+    
+def main():
+    fonfon = Estacionamento()
+if __name__ == "__main__":
+    main()
+    
