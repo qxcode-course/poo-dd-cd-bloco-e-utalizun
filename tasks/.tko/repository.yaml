@@ -18,7 +18,10 @@ sources:
 expanded:
 - poo@campanha-principal
 - poo@bloco_f-herança-i
-tasks: {}
+tasks:
+  poo@zoo: '{rate:100, alone:10}'
+  poo@pagamento: '{rate:100, alone:10}'
+  poo@estacionamento: '{rate:25}'
 flags:
   quests: 0
   tracks: 0
@@ -26,4 +29,4 @@ flags:
   graph: 1
   xray: 0
 lang: py
-selected: poo@pagamento
+selected: poo@estacionamento

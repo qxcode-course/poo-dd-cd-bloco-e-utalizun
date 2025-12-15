@@ -4,7 +4,7 @@ class Veiculo(ABC):
     def __init__(self, id: str, tipo: str, hora_entrada: int):
         self.id = id
         self.tipo = tipo
-        self.hora_entrada = 0
+        self.hora_entrada = hora_entrada
 
     def setEntrada(self, hora):
         self.hora_entrada = hora
@@ -23,18 +23,18 @@ class Veiculo(ABC):
         pass
 
     def __str__(self):
-        return f"__{self.tipo} : ___{self.id} : {self.horaEntrada}"
+        return f"______{self.tipo} : _____{self.id} : {self.hora_entrada}"
     
 class Bike(Veiculo):
     def __init__(self, id):
-        super().__init__(id,"Bike")
+        super().__init__(id,"Bike",0)
 
     def calcular_valor(self, hora_saida):
         return 3.0
     
 class Moto(Veiculo):
     def __init__(self, id):
-        super().__init__(id,"Moto")
+        super().__init__(id,"Moto",0)
 
     def calcular_valor(self, hora_saida):
         tempo = hora_saida - self.hora_entrada
@@ -43,7 +43,7 @@ class Moto(Veiculo):
 
 class Carro(Veiculo):
     def __init__(self, id):
-        super().__init__(id,"Carro")
+        super().__init__(id,"Carro",0)
 
     def calcular_valor(self, hora_saida):
         tempo = hora_saida - self.hora_entrada
@@ -77,7 +77,7 @@ class Estacionamento:
         valor = v.calcular_valor(self.horaAtual)
 
         print (
-            f"{v.getTipo()} chegou {v.getEntrada()} saiu{self.horaAtual}."
+            f"{v.getTipo()} chegou {v.getEntrada()} saiu {self.horaAtual}."
             f"Pagar R$ {valor:.2f}"
         )
     def sair(self,id):
@@ -95,7 +95,38 @@ class Estacionamento:
         return texto
     
 def main():
-    fonfon = Estacionamento()
+    estacionamento = Estacionamento()
+    while True:
+        line = input()
+        print("$" + line)
+        args = line.split(" ")
+
+        if args[0] == "end":
+            break
+        elif args[0] == "show":
+            print(estacionamento)
+        elif args[0] == "tempo":
+            tempo = int (args[1])
+            estacionamento.passarTempo(tempo)
+        elif args [0] == "estacionar":
+            tipo = args[1]
+            id = args[2]
+            if tipo == "bike":
+                v = Bike(id)
+            elif tipo == "moto":
+                v = Moto(id)
+            elif tipo == "carro":
+                v = Carro(id)
+            else:
+                print ("tipo invalido")
+            
+            estacionamento.pagar(id) 
+            estacionamento.estacionar(v)
+        elif args[0] == "pagar":
+            id = args[1]
+            estacionamento.pagar(id)
+            
+        
+       
 if __name__ == "__main__":
     main()
-    
